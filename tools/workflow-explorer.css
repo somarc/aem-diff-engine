@@ -239,7 +239,7 @@ button:focus-visible,
   padding: 24px 20px 18px;
 }
 
-.eyebrow {
+.proof-context {
   margin: 0 0 10px;
   color: var(--published);
   font-family: var(--label);
@@ -452,7 +452,7 @@ button:focus-visible,
   background: rgb(15 19 28 / 88%);
 }
 
-.active-label {
+.workflow-titlebar {
   min-width: 0;
   color: var(--muted);
   font-family: var(--mono);
@@ -462,13 +462,13 @@ button:focus-visible,
   white-space: nowrap;
 }
 
-.active-label strong {
+.workflow-titlebar strong {
   color: var(--text);
   font-family: var(--sans);
   font-size: 13px;
 }
 
-.active-label .posture-chip {
+.workflow-titlebar .posture-chip {
   display: inline-block;
   margin-left: 10px;
 }
@@ -975,7 +975,7 @@ button:focus-visible,
     flex-direction: column;
   }
 
-  .active-label {
+  .workflow-titlebar {
     width: 100%;
     white-space: normal;
   }

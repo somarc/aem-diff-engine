@@ -7,18 +7,24 @@
   <meta name="description" content="Trace AEM Diff Engine workflows across publish baselines, author edits, JCR storage, references, Launches, APIs, rendering, and known boundaries.">
   <title>AEM Diff Engine Workflow Explorer</title>
   <link rel="stylesheet" href="/tools/workflow-explorer.css">
+  <style>
+    .nav-brand { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+    @media (width < 900px) {
+      .nav-sections.is-open { position: fixed; inset: 64px 0 auto; max-height: calc(100dvh - 64px); overflow-y: auto; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#workflow-tree">Skip to workflows</a>
 
   <header class="static-header">
     <nav class="site-nav" aria-label="Primary navigation">
-      <a class="site-home" href="/">
+      <a class="site-home nav-brand" href="/">
         <span aria-hidden="true">∆</span>
         AEM Diff Engine
       </a>
       <button class="static-nav-toggle" id="static-nav-toggle" type="button" aria-expanded="false" aria-controls="static-nav-links" aria-label="Open navigation"><span aria-hidden="true"></span></button>
-      <div class="static-nav-links" id="static-nav-links">
+      <div class="static-nav-links nav-sections" id="static-nav-links">
         <a href="/how-it-works">How it works</a>
         <a href="/architecture">Architecture</a>
         <a href="/jcr-model">JCR model</a>
@@ -40,7 +46,7 @@
   <main class="workspace">
     <aside class="sidebar" aria-label="Workflow selection">
       <div class="sidebar-heading">
-        <p class="eyebrow">STATIC PROOF SURFACE</p>
+        <p class="proof-context">STATIC PROOF SURFACE</p>
         <h1>AEM Diff Engine flows</h1>
         <p>Trace what runs, where state lives, and where certainty ends. Each journey is mapped to the current implementation—not an aspirational platform diagram.</p>
         <div class="scope" role="group" aria-label="Map scope">
@@ -56,7 +62,7 @@
 
     <section class="main-panel" aria-label="Workflow detail">
       <div class="toolbar">
-        <div class="active-label" id="active-label" aria-live="polite">
+        <div class="workflow-titlebar" id="active-label" aria-live="polite">
           <span>Select a workflow to trace its runtime path.</span>
         </div>
         <div class="legend" aria-label="Node and edge types">

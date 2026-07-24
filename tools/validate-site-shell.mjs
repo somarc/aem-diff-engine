@@ -40,7 +40,7 @@ function assertNavigation(actual, label) {
 
 if (contract.schemaVersion !== 'aem-diff-engine.site-shell.v1') fail('Unsupported site-shell contract schemaVersion.');
 
-const explorerLinks = extractLinks(explorer, /<div class="static-nav-links"[^>]*>([\s\S]*?)<\/div>/i);
+const explorerLinks = extractLinks(explorer, /<div class="[^"]*static-nav-links[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
 assertNavigation(explorerLinks, 'Static explorer navigation');
 
 const footerTokens = [
