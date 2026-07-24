@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080a0f">
+  <meta name="description" content="Trace AEM Diff Engine workflows across publish baselines, author edits, JCR storage, references, Launches, APIs, rendering, and known boundaries.">
+  <title>AEM Diff Engine Workflow Explorer</title>
+  <link rel="stylesheet" href="/tools/workflow-explorer.css">
+</head>
+<body>
+  <a class="skip-link" href="#workflow-tree">Skip to workflows</a>
+
+  <header class="static-header">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="site-home" href="/">
+        <span aria-hidden="true">∆</span>
+        AEM Diff Engine
+      </a>
+      <button class="static-nav-toggle" id="static-nav-toggle" type="button" aria-expanded="false" aria-controls="static-nav-links" aria-label="Open navigation"><span aria-hidden="true"></span></button>
+      <div class="static-nav-links" id="static-nav-links">
+        <a href="/how-it-works">How it works</a>
+        <a href="/architecture">Architecture</a>
+        <a href="/jcr-model">JCR model</a>
+        <a href="/references-launches">References + Launches</a>
+        <a href="/api">API</a>
+        <a aria-current="page" href="/tools/workflow-explorer.html">Workflow Explorer</a>
+        <a href="/readiness">Readiness</a>
+        <a class="source-link" href="https://github.com/AEM-CoInnovation-Engineering/aem-diff-engine">Source</a>
+      </div>
+    </nav>
+    <div class="tool-context">
+      <span class="page-title">Workflow Explorer</span>
+      <span class="breadcrumb" id="breadcrumb">Engineering Preview · runtime map</span>
+      <button class="share-link" id="share-link" type="button">Copy link</button>
+      <span class="visually-hidden" id="copy-status" role="status"></span>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="sidebar" aria-label="Workflow selection">
+      <div class="sidebar-heading">
+        <p class="eyebrow">STATIC PROOF SURFACE</p>
+        <h1>AEM Diff Engine flows</h1>
+        <p>Trace what runs, where state lives, and where certainty ends. Each journey is mapped to the current implementation—not an aspirational platform diagram.</p>
+        <div class="scope" role="group" aria-label="Map scope">
+          <div><span>map</span><strong>18 workflows</strong></div>
+          <div><span>runtime</span><strong>1.0.0-SNAPSHOT</strong></div>
+          <div><span>API</span><strong>0.1.0</strong></div>
+          <div><span>source</span><strong>b9bf49d</strong></div>
+        </div>
+        <nav class="journeys" id="journeys" aria-label="Journey shortcuts"></nav>
+      </div>
+      <nav class="workflow-tree" id="workflow-tree" aria-label="Workflow groups"></nav>
+    </aside>
+
+    <section class="main-panel" aria-label="Workflow detail">
+      <div class="toolbar">
+        <div class="active-label" id="active-label" aria-live="polite">
+          <span>Select a workflow to trace its runtime path.</span>
+        </div>
+        <div class="legend" aria-label="Node and edge types">
+          <span><i class="trigger" aria-hidden="true"></i>trigger</span>
+          <span><i class="entry" aria-hidden="true"></i>entry</span>
+          <span><i class="service" aria-hidden="true"></i>service</span>
+          <span><i class="state" aria-hidden="true"></i>state</span>
+          <span><i class="consumer" aria-hidden="true"></i>consumer</span>
+          <span><i class="edge-key async" aria-hidden="true"></i>queued</span>
+          <span><i class="edge-key write" aria-hidden="true"></i>write</span>
+        </div>
+      </div>
+
+      <div class="diagram-wrap" role="region" aria-label="AEM Diff Engine runtime diagram; scroll horizontally to inspect the full graph" tabindex="0">
+        <span class="scroll-hint" aria-hidden="true">scroll diagram →</span>
+        <svg id="diagram" viewBox="0 0 1040 640" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="diagram-title diagram-description">
+          <title id="diagram-title">AEM Diff Engine runtime workflow</title>
+          <desc id="diagram-description">A highlighted graph of triggers, listeners and request processors, services and jobs, JCR state, and consumer responses.</desc>
+          <defs>
+            <marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z"></path></marker>
+            <marker id="arrow-trigger" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z"></path></marker>
+            <marker id="arrow-entry" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z"></path></marker>
+            <marker id="arrow-service" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z"></path></marker>
+            <marker id="arrow-state" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z"></path></marker>
+            <marker id="arrow-consumer" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z"></path></marker>
+          </defs>
+          <g id="lane-layer"></g>
+          <g id="edge-layer"></g>
+          <g id="node-layer"></g>
+        </svg>
+      </div>
+
+      <div class="annotations" id="annotations">
+        <div class="empty-state" id="empty-state">
+          <span aria-hidden="true">↗</span>
+          <p>Select a workflow from the left to reveal its execution steps and implementation boundary.</p>
+        </div>
+        <div class="steps" id="steps" hidden></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="operator-footer">
+    <strong>Built by FluffyJaws Dev Studio 0.2.4</strong>
+    <span>Operator: AEM Co-Innovation Engineering</span>
+    <span>DA operator: @somarc/da-cli 0.6.0 certification candidate a97601d (package 0.5.1)</span>
+    <span>AEM Diff Engine · AEM Co-Innovation Engineering</span>
+    <span>Feature preview only — no DA-authored content promoted to *.aem.live</span>
+  </footer>
+
+  <noscript>
+    <p class="noscript">JavaScript enables workflow selection. The architecture and technical narrative remain available on the <a href="/architecture">Architecture page</a>.</p>
+  </noscript>
+
+  <script type="module" src="/tools/workflow-explorer.js"></script>
+</body>
+</html>

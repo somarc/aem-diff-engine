@@ -1,0 +1,234 @@
+.version-lens-hero-container .version-lens-hero-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.version-lens-hero {
+  position: relative;
+  min-height: calc(100svh - var(--nav-height));
+  border-bottom: 1px solid var(--hairline-color);
+  background:
+    radial-gradient(circle at 73% 35%, rgb(183 156 255 / 14%), transparent 26rem),
+    linear-gradient(115deg, rgb(121 216 255 / 6%), transparent 42%),
+    var(--background-color);
+  overflow: hidden;
+}
+
+.version-lens-hero::before {
+  content: "PUBLISHED  ───────────────────  CURRENT";
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  color: rgb(170 181 197 / 45%);
+  font-family: var(--code-font-family);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+.version-lens-hero .lens-inner {
+  display: grid;
+  gap: 48px;
+  align-items: center;
+  max-width: calc(var(--content-width) + 80px);
+  min-height: calc(100svh - var(--nav-height));
+  margin: auto;
+  padding: 88px 24px 64px;
+}
+
+.version-lens-hero .lens-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.version-lens-hero .lens-copy h1 {
+  max-width: 780px;
+  margin-block: 20px 28px;
+  font-size: clamp(3.45rem, 8vw, 7.75rem);
+}
+
+.version-lens-hero .lens-copy h1 em {
+  color: var(--current-color);
+  font-style: normal;
+}
+
+.version-lens-hero .lens-copy h1 + p {
+  max-width: 680px;
+  color: var(--muted-color);
+  font-size: clamp(1.12rem, 2vw, 1.4rem);
+}
+
+.version-lens-hero .lens-copy > p:first-child {
+  color: var(--published-color);
+  font-family: var(--label-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.version-lens-hero .lens-art {
+  min-width: 0;
+}
+
+.version-lens-hero .lens-stage {
+  --lens-x: 58%;
+
+  position: relative;
+  min-height: 470px;
+  border: 1px solid var(--hairline-color);
+  border-radius: var(--radius-l);
+  background: #07090e;
+  box-shadow: 0 36px 90px rgb(0 0 0 / 38%);
+  overflow: hidden;
+  isolation: isolate;
+  touch-action: pan-y;
+  cursor: ew-resize;
+}
+
+.version-lens-hero .lens-stage::before {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  inset: 0 auto 0 var(--lens-x);
+  width: 1px;
+  background: linear-gradient(transparent, var(--text-color) 18%, var(--text-color) 82%, transparent);
+  box-shadow: 0 0 34px rgb(244 247 251 / 35%);
+  pointer-events: none;
+}
+
+.version-lens-hero .lens-state {
+  position: absolute;
+  inset: 0;
+  padding: 34px 26px;
+  overflow: hidden;
+}
+
+.version-lens-hero .lens-published {
+  background:
+    linear-gradient(135deg, rgb(121 216 255 / 9%), transparent 42%),
+    #090d14;
+}
+
+.version-lens-hero .lens-current {
+  clip-path: inset(0 0 0 var(--lens-x));
+  background:
+    linear-gradient(225deg, rgb(185 255 102 / 11%), transparent 48%),
+    #0b0f13;
+}
+
+.version-lens-hero .lens-state > p:first-child {
+  margin: 0 0 20px;
+  color: var(--published-color);
+  font-family: var(--label-font-family);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.version-lens-hero .lens-current > p:first-child {
+  color: var(--current-color);
+  text-align: right;
+}
+
+.version-lens-hero .lens-state pre {
+  height: calc(100% - 66px);
+  margin: 0;
+  border: 0;
+  padding: 24px 18px;
+  background: rgb(0 0 0 / 28%);
+  color: #dce6f3;
+  font-size: clamp(11px, 1.35vw, 14px);
+  line-height: 1.72;
+  overflow: hidden;
+}
+
+.version-lens-hero .lens-current pre {
+  text-align: left;
+}
+
+.version-lens-hero .lens-code-line {
+  display: block;
+  min-height: 1.72em;
+  white-space: pre;
+}
+
+.version-lens-hero .lens-code-line.is-added {
+  background: rgb(185 255 102 / 11%);
+  color: var(--current-color);
+}
+
+.version-lens-hero .lens-code-line.is-deleted {
+  background: rgb(255 122 122 / 10%);
+  color: var(--deleted-color);
+}
+
+.version-lens-hero .lens-code-line.is-modified {
+  background: rgb(183 156 255 / 11%);
+  color: var(--modified-color);
+}
+
+.version-lens-hero .lens-handle {
+  position: absolute;
+  z-index: 7;
+  top: 50%;
+  left: var(--lens-x);
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgb(244 247 251 / 75%);
+  border-radius: 50%;
+  background: rgb(8 10 15 / 88%);
+  color: var(--text-color);
+  box-shadow: 0 8px 22px rgb(0 0 0 / 38%);
+  font-family: var(--code-font-family);
+  pointer-events: none;
+}
+
+.version-lens-hero .lens-controls {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  margin-top: 14px;
+  color: var(--muted-color);
+  font-family: var(--label-font-family);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.version-lens-hero .lens-controls span:first-child {
+  color: var(--published-color);
+}
+
+.version-lens-hero .lens-controls span:last-child {
+  color: var(--current-color);
+  text-align: right;
+}
+
+.version-lens-hero .lens-controls input {
+  width: 100%;
+  accent-color: var(--modified-color);
+}
+
+@media (width >= 900px) {
+  .version-lens-hero .lens-inner {
+    grid-template-columns: minmax(0, 0.95fr) minmax(460px, 0.8fr);
+    gap: clamp(44px, 6vw, 92px);
+    padding: 72px 40px;
+  }
+
+  .version-lens-hero .lens-stage {
+    min-height: min(62vh, 640px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .version-lens-hero .lens-stage {
+    --lens-x: 58% !important;
+  }
+}

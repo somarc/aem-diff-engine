@@ -1,10 +1,7 @@
 .columns > div {
   display: flex;
   flex-direction: column;
-}
-
-.columns img {
-  width: 100%;
+  gap: 28px;
 }
 
 .columns > div > div {
@@ -15,19 +12,50 @@
   order: 0;
 }
 
-.columns > div > .columns-img-col img {
+.columns img {
   display: block;
+  width: 100%;
+  border-radius: var(--radius-m);
+}
+
+.columns h2,
+.columns h3 {
+  max-width: 680px;
+}
+
+.columns p {
+  color: var(--muted-color);
+}
+
+.columns.comparison > div > div {
+  border: 1px solid var(--hairline-color);
+  border-radius: var(--radius-m);
+  padding: 26px;
+  background: var(--ink-color);
+}
+
+.columns.comparison > div > div:first-child {
+  border-top: 3px solid var(--published-color);
+}
+
+.columns.comparison > div > div:last-child {
+  border-top: 3px solid var(--current-color);
 }
 
 @media (width >= 900px) {
   .columns > div {
     align-items: center;
-    flex-direction: unset;
-    gap: 24px;
+    flex-direction: row;
+    gap: clamp(40px, 7vw, 96px);
   }
 
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+
+  .columns.comparison > div {
+    align-items: stretch;
+    gap: 18px;
   }
 }

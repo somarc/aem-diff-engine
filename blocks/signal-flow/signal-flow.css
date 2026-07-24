@@ -1,0 +1,92 @@
+.signal-flow > ol {
+  position: relative;
+  display: grid;
+  gap: 0;
+  margin: 44px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.signal-flow .signal-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 4px 18px;
+  border-top: 1px solid var(--hairline-color);
+  padding: 24px 0;
+}
+
+.signal-flow .signal-number {
+  grid-row: 1 / span 2;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--published-color);
+  border-radius: 50%;
+  color: var(--published-color);
+  font-family: var(--code-font-family);
+  font-size: 12px;
+}
+
+.signal-flow .signal-body h3 {
+  margin: 0;
+  font-family: var(--label-font-family);
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+
+.signal-flow .signal-body p {
+  color: var(--muted-color);
+  font-size: var(--body-font-size-s);
+}
+
+.signal-flow .signal-output {
+  grid-column: 2;
+  color: var(--current-color);
+  font-family: var(--code-font-family);
+  font-size: 12px;
+}
+
+.signal-flow .signal-output p::before {
+  content: "→ ";
+  color: var(--modified-color);
+}
+
+@media (width >= 900px) {
+  .signal-flow > ol {
+    grid-template-columns: repeat(var(--flow-columns, 6), minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .signal-flow .signal-step {
+    display: block;
+    border: 1px solid var(--hairline-color);
+    border-radius: var(--radius-m);
+    padding: 20px;
+    background: var(--ink-color);
+  }
+
+  .signal-flow .signal-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: 40px;
+    right: -15px;
+    width: 15px;
+    height: 1px;
+    background: var(--modified-color);
+  }
+
+  .signal-flow .signal-number {
+    margin-bottom: 22px;
+  }
+
+  .signal-flow .signal-body p {
+    min-height: 6.5em;
+  }
+
+  .signal-flow .signal-output {
+    margin-top: 18px;
+  }
+}

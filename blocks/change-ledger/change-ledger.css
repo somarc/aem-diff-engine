@@ -1,0 +1,90 @@
+.change-ledger {
+  margin-top: 40px;
+  border: 1px solid var(--hairline-color);
+  border-radius: var(--radius-m);
+  background: var(--dark-color);
+  overflow: hidden;
+}
+
+.change-ledger table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.change-ledger th,
+.change-ledger td {
+  border-bottom: 1px solid var(--hairline-color);
+  padding: 15px 18px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.change-ledger th {
+  background: var(--ink-color);
+  color: var(--muted-color);
+  font-family: var(--label-font-family);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.change-ledger td {
+  color: var(--muted-color);
+  font-size: var(--body-font-size-s);
+}
+
+.change-ledger td:first-child {
+  color: var(--text-color);
+  font-family: var(--code-font-family);
+  font-size: 12px;
+}
+
+.change-ledger td:nth-child(2) {
+  color: var(--published-color);
+}
+
+.change-ledger td:nth-child(3) {
+  color: var(--current-color);
+}
+
+.change-ledger tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+@media (width < 700px) {
+  .change-ledger thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .change-ledger tr,
+  .change-ledger td {
+    display: block;
+  }
+
+  .change-ledger tr {
+    border-bottom: 1px solid var(--hairline-color);
+    padding: 14px 0;
+  }
+
+  .change-ledger td {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 12px;
+    border-bottom: 0;
+    padding-block: 7px;
+  }
+
+  .change-ledger td::before {
+    content: attr(data-label);
+    color: var(--muted-color);
+    font-family: var(--label-font-family);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}

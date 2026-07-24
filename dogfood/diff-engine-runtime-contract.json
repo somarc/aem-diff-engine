@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "aem-diff-engine.runtime-contract.v1",
+  "product": "AEM Diff Engine",
+  "source": {
+    "repository": "AEM-CoInnovation-Engineering/aem-diff-engine",
+    "commit": "b9bf49decd98843030953218c1c4d4251301999a",
+    "tree": "04cb53df4ae8aba058d235532b5834818f12f124",
+    "runtimeVersion": "1.0.0-SNAPSHOT",
+    "apiVersion": "0.1.0",
+    "validatedOn": "2026-07-24"
+  },
+  "entryPoints": [
+    "PublishSnapshotPreprocessor",
+    "ChangeTrackingListener",
+    "LaunchLifecycleListener",
+    "LaunchPromotionListener",
+    "GetContentChangesRequestProcessor",
+    "GetChangeSummaryRequestProcessor",
+    "CreateSnapshotRequestProcessor",
+    "RenderContentVersionRequestProcessor"
+  ],
+  "jobTopics": {
+    "changes": "com/adobe/aem/diffengine/process",
+    "launchBaseline": "com/adobe/aem/diffengine/launch/baseline",
+    "launchCleanup": "com/adobe/aem/diffengine/launch/cleanup",
+    "launchPromotionFollowup": "com/adobe/aem/diffengine/launch/promotion-followup"
+  },
+  "storage": {
+    "root": "/var/aem/changetracking",
+    "snapshotNode": "publish-snapshot",
+    "changesNode": "changes",
+    "componentBaselineNode": "_baseline",
+    "versionStorage": "/jcr:system/jcr:versionStorage"
+  },
+  "endpoints": [
+    { "method": "GET", "path": "/adobe/sites/diffEngine/changes" },
+    { "method": "GET", "path": "/adobe/sites/diffEngine/changes/summary" },
+    { "method": "POST", "path": "/adobe/sites/diffEngine/snapshots" },
+    { "method": "GET", "path": "/adobe/sites/diffEngine/renders" }
+  ],
+  "trackingStatuses": ["READY", "NOT_YET_TRACKED", "NO_TRACKING"],
+  "changeOrigins": ["DIRECT_EDIT", "ROLLOUT_PROPAGATED", "LAUNCH_PROMOTION", "UNKNOWN"],
+  "testEvidence": {
+    "command": "mvn -q test",
+    "tests": 351,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "realAemBoundary": "The checked integration client still targets retired /bin/diffengine endpoints and is not part of the default green build."
+  },
+  "claimDrift": [
+    "The REST ReferencedContent model does not expose all readiness metadata carried by the internal model.",
+    "References added after publication are not unioned into reference audit composition.",
+    "A purged version UUID can fall through to live content in the render decorator instead of reliably returning 410.",
+    "The listener queues paths and metadata; it does not capture event-time content state.",
+    "Promotion attribution uses a pod-local in-memory cache.",
+    "The Launch cleanup guard can conflict with eager cleanup of an existing empty retained shell."
+  ],
+  "publicationBoundary": "This contract supports a feature-preview documentation site. It is not permission to publish any DA page to *.aem.live."
+}

@@ -1,34 +1,43 @@
-# Your Project's Title...
-Your project's description...
+# AEM Diff Engine — EDS Site
 
-## Environments
-- Preview: https://main--{repo}--{owner}.aem.page/
-- Live: https://main--{repo}--{owner}.aem.live/
+The product story and living technical manual for the AEM Diff Engine delivered through AEM Co-Innovation Engineering.
 
-## Documentation
+- **Preview:** https://main--aem-diff-engine--somarc.aem.page/
+- **Workflow Explorer:** https://main--aem-diff-engine--somarc.aem.page/tools/workflow-explorer.html
+- **Runtime source:** https://github.com/AEM-CoInnovation-Engineering/aem-diff-engine
+- **DA source:** `somarc/aem-diff-engine`
 
-Before using the aem-boilerplate, we recommand you to go through the documentation on https://www.aem.live/docs/ and more specifically:
-1. [Developer Tutorial](https://www.aem.live/developer/tutorial)
-2. [The Anatomy of a Project](https://www.aem.live/developer/anatomy-of-a-project)
-3. [Web Performance](https://www.aem.live/developer/keeping-it-100)
-4. [Markup, Sections, Blocks, and Auto Blocking](https://www.aem.live/developer/markup-sections-blocks)
+## Content and code ownership
 
-## Installation
+DA is the source of truth for authored HTML, navigation, and footer content. Git owns EDS block code, design intent, static tools, validation contracts, and build evidence. Authored DA documents are intentionally not mirrored into Git.
 
-```sh
-npm i
-```
-
-## Linting
-
-```sh
-npm run lint
-```
+The design direction is documented in [DESIGN.md](./DESIGN.md), and the route/content contract lives in [dogfood/CONTENT-IA.md](./dogfood/CONTENT-IA.md).
 
 ## Local development
 
-1. Create a new repository based on the `aem-boilerplate` template
-1. Add the [AEM Code Sync GitHub App](https://github.com/apps/aem-code-sync) to the repository
-1. Install the [AEM CLI](https://github.com/adobe/helix-cli): `npm install -g @adobe/aem-cli`
-1. Start AEM Proxy: `aem up` (opens your browser at `http://localhost:3000`)
-1. Open the `{repo}` directory in your favorite IDE and start coding :)
+```bash
+npm install
+npm run check
+npx -y @adobe/aem-cli up --no-open --forward-browser-logs
+```
+
+Local server: http://localhost:3000/
+
+## Validation
+
+```bash
+npm run lint
+npm run validate:workflows
+npm run validate:site-shell
+npm run check
+```
+
+The Workflow Explorer is a static, deep-linkable code-bus tool pinned to the checked runtime contract in `dogfood/diff-engine-runtime-contract.json`. The site-shell validator keeps its standalone navigation and attribution aligned with the DA-authored shell.
+
+## Build provenance
+
+Built by **FluffyJaws Dev Studio 0.2.4** for **AEM Co-Innovation Engineering**, using the `@somarc/da-cli` 0.6.0 certification candidate at `a97601d` (the source-tree runtime reports package version `0.5.1`).
+
+## Publication boundary
+
+This project is currently a preview-only engineering surface. DA content may be activated on `*.aem.page`; no DA-authored page is to be promoted to `*.aem.live` without a separate explicit human approval and reviewed canonical-page manifest.

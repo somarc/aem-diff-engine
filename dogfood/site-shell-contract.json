@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "aem-diff-engine.site-shell.v1",
+  "brand": {
+    "label": "AEM Diff Engine",
+    "href": "/"
+  },
+  "navigation": [
+    { "label": "How it works", "href": "/how-it-works" },
+    { "label": "Architecture", "href": "/architecture" },
+    { "label": "JCR model", "href": "/jcr-model" },
+    { "label": "References + Launches", "href": "/references-launches" },
+    { "label": "API", "href": "/api" },
+    { "label": "Workflow Explorer", "href": "/tools/workflow-explorer.html" },
+    { "label": "Readiness", "href": "/readiness" },
+    { "label": "Source", "href": "https://github.com/AEM-CoInnovation-Engineering/aem-diff-engine" }
+  ],
+  "attribution": {
+    "builder": "FluffyJaws Dev Studio 0.2.4",
+    "operator": "AEM Co-Innovation Engineering",
+    "daCertification": "@somarc/da-cli 0.6.0 certification candidate a97601d",
+    "daReportedPackageVersion": "0.5.1",
+    "productTeam": "AEM Co-Innovation Engineering",
+    "publicationBoundary": "Feature preview only — no DA-authored content promoted to *.aem.live"
+  }
+}

@@ -1,0 +1,96 @@
+.jcr-tree {
+  margin-top: 40px;
+  border: 1px solid var(--hairline-color);
+  border-radius: var(--radius-m);
+  background: var(--dark-color);
+  overflow: hidden;
+}
+
+.jcr-tree .jcr-tree-list {
+  margin: 0;
+  padding: 18px 0;
+  list-style: none;
+}
+
+.jcr-tree .jcr-tree-node {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  min-height: 58px;
+  border-bottom: 1px solid rgb(42 52 70 / 68%);
+  padding: 12px 18px 12px calc(18px + var(--tree-depth) * 16px);
+}
+
+.jcr-tree .jcr-tree-node:last-child {
+  border-bottom: 0;
+}
+
+.jcr-tree .jcr-tree-node::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(18px + var(--tree-depth) * 16px - 10px);
+  width: 1px;
+  background: var(--hairline-color);
+}
+
+.jcr-tree .jcr-tree-path {
+  color: var(--published-color);
+  font-family: var(--code-font-family);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.jcr-tree .jcr-tree-detail {
+  color: var(--muted-color);
+  font-size: var(--body-font-size-xs);
+}
+
+.jcr-tree .jcr-tree-state {
+  justify-self: start;
+  border: 1px solid var(--hairline-color);
+  border-radius: 999px;
+  padding: 2px 8px;
+  color: var(--muted-color);
+  font-family: var(--label-font-family);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.jcr-tree .jcr-tree-node[data-state="version"] .jcr-tree-state,
+.jcr-tree .jcr-tree-node[data-state="published"] .jcr-tree-state {
+  border-color: rgb(121 216 255 / 48%);
+  color: var(--published-color);
+}
+
+.jcr-tree .jcr-tree-node[data-state="working"] .jcr-tree-state,
+.jcr-tree .jcr-tree-node[data-state="current"] .jcr-tree-state {
+  border-color: rgb(185 255 102 / 48%);
+  color: var(--current-color);
+}
+
+.jcr-tree .jcr-tree-node[data-state="record"] .jcr-tree-state {
+  border-color: rgb(183 156 255 / 48%);
+  color: var(--modified-color);
+}
+
+@media (width >= 700px) {
+  .jcr-tree .jcr-tree-node {
+    grid-template-columns: minmax(240px, 1.3fr) minmax(180px, 1fr) auto;
+    align-items: center;
+    gap: 20px;
+    padding-left: calc(28px + var(--tree-depth) * 22px);
+  }
+
+  .jcr-tree .jcr-tree-node::before {
+    left: calc(28px + var(--tree-depth) * 22px - 12px);
+  }
+
+  .jcr-tree .jcr-tree-state {
+    justify-self: end;
+  }
+}
