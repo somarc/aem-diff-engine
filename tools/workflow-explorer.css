@@ -48,6 +48,7 @@ html {
 
 body {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) auto;
   width: 100%;
   min-width: 0;
@@ -104,6 +105,9 @@ button:focus-visible,
 .static-header {
   position: relative;
   z-index: 20;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   border-bottom: 1px solid var(--hairline);
   background: rgb(8 10 15 / 96%);
 }
@@ -194,6 +198,7 @@ button:focus-visible,
   display: flex;
   align-items: center;
   gap: 14px;
+  min-width: 0;
   min-height: 38px;
   border-top: 1px solid var(--hairline);
   padding: 5px 18px;
@@ -236,7 +241,7 @@ button:focus-visible,
   display: grid;
   grid-template-columns: 355px minmax(0, 1fr);
   width: 100%;
-  max-width: 100vw;
+  max-width: 100%;
   min-height: 0;
 }
 
@@ -815,6 +820,7 @@ button:focus-visible,
   line-height: 1.5;
   letter-spacing: 0.025em;
   text-align: left;
+  overflow-wrap: anywhere;
 }
 
 .operator-footer strong {
@@ -1015,7 +1021,7 @@ button:focus-visible,
 
   .diagram-wrap {
     width: 100%;
-    max-width: 100vw;
+    max-width: 100%;
     height: clamp(360px, 65vw, 500px);
     border-bottom: 1px solid var(--hairline);
     overflow: auto hidden;
