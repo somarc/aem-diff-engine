@@ -38,11 +38,6 @@ header nav p {
   line-height: 1;
 }
 
-header nav a:any-link {
-  color: currentcolor;
-  text-decoration: none;
-}
-
 header nav .nav-hamburger {
   grid-area: hamburger;
   display: flex;
@@ -105,11 +100,29 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
 
 header .nav-brand {
   grid-area: brand;
-  flex: 0 0 auto;
+  min-width: 0;
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   white-space: nowrap;
+}
+
+header .nav-brand p,
+header .nav-brand a {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  height: 100%;
+}
+
+header .nav-brand a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+header nav a:any-link {
+  color: currentcolor;
+  text-decoration: none;
 }
 
 header .nav-brand a::before {
@@ -159,19 +172,40 @@ header nav .nav-sections a:hover {
 
 header nav .nav-tools {
   grid-area: tools;
-  color: var(--muted-color);
+  display: none;
+  align-items: center;
+  justify-self: end;
+  color: var(--text-color);
   font-size: var(--body-font-size-xs);
 }
 
-@media (width >= 900px) {
-  header nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 28px;
-    padding-inline: 40px;
-  }
+header nav[aria-expanded="true"] .nav-tools {
+  display: flex;
+}
 
+header nav .nav-tools .button-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+header nav .nav-tools a.button {
+  min-height: 38px;
+  border-width: 1px;
+  padding: 0.5em 1.05em;
+  font-size: 0.8125rem;
+}
+
+@media (width >= 1200px) {
+  header nav,
   header nav[aria-expanded="true"] {
+    display: grid;
+    grid-template:
+      "brand sections tools" var(--nav-height)
+      / minmax(210px, 1fr) auto minmax(210px, 1fr);
+    gap: clamp(18px, 2vw, 40px);
+    max-width: 1820px;
+    padding-inline: 40px;
     min-height: 0;
     overflow: visible;
     background: transparent;
@@ -182,21 +216,35 @@ header nav .nav-tools {
     visibility: hidden;
   }
 
-  header nav .nav-sections {
+  header nav .nav-sections,
+  header nav[aria-expanded="true"] .nav-sections {
     display: block;
-    flex: 1 1 auto;
+    place-self: center;
+    width: auto;
     visibility: visible;
     white-space: nowrap;
   }
 
   header nav .nav-sections ul {
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 22px;
+    gap: clamp(12px, 1.15vw, 22px);
     margin: 0;
+    font-size: 0.875rem;
+    line-height: 1;
   }
 
   header nav .nav-sections li {
     padding: 0;
+  }
+
+  header nav .nav-brand {
+    justify-self: start;
+  }
+
+  header nav .nav-tools {
+    display: flex;
+    height: 100%;
   }
 }

@@ -109,13 +109,15 @@ button:focus-visible,
 }
 
 .site-nav {
-  display: flex;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(210px, 1fr) auto minmax(210px, 1fr);
   align-items: center;
-  gap: 22px;
-  max-width: 1500px;
+  gap: clamp(18px, 2vw, 40px);
+  max-width: 1820px;
   height: 72px;
   margin: auto;
-  padding: 0 24px;
+  padding: 0 40px;
   color: var(--muted);
   font-family: var(--label);
   font-size: 12px;
@@ -154,9 +156,9 @@ button:focus-visible,
 .static-nav-links {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   gap: clamp(11px, 1.25vw, 20px);
-  flex: 1;
+  justify-self: center;
   min-width: 0;
 }
 
@@ -169,10 +171,23 @@ button:focus-visible,
 }
 
 .static-nav-links .source-link {
+  position: absolute;
+  inset-inline-end: 24px;
+  top: 50%;
+  min-height: 38px;
+  transform: translateY(-50%);
   border: 1px solid var(--hairline);
   border-radius: 999px;
-  padding: 7px 12px;
-  color: var(--text);
+  padding: 9px 16px;
+  background: var(--current);
+  color: var(--night);
+  font-weight: 700;
+}
+
+.static-nav-links .source-link:hover {
+  border-color: var(--current);
+  background: #d6ffa6;
+  color: var(--night);
 }
 
 .tool-context {
@@ -815,7 +830,7 @@ button:focus-visible,
   color: var(--hairline-bright);
 }
 
-@media (width <= 1100px) {
+@media (width < 1200px) {
   .static-header {
     position: sticky;
     top: 0;
@@ -905,9 +920,12 @@ button:focus-visible,
   }
 
   .static-nav-links .source-link {
+    position: static;
+    min-height: 44px;
     margin-top: 10px;
     border: 1px solid var(--hairline);
     padding-inline: 14px;
+    transform: none;
     text-align: center;
   }
 
