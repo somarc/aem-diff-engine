@@ -1,0 +1,80 @@
+name: aem-diff-engine-preview-certification
+# DA is the sole source of truth for authored HTML. This pipeline activates
+# existing DA documents on *.aem.page and verifies the code/content contract.
+# It never uploads Git-authored page fixtures and never promotes to *.aem.live.
+#
+# Plan:
+#   da --org somarc --repo aem-diff-engine --branch main pipeline run dogfood/certify.yaml --dry-run --format json
+# Execute after review:
+#   da --org somarc --repo aem-diff-engine --branch main --commit pipeline run dogfood/certify.yaml --format json
+steps:
+  - id: status
+    command: status --format json
+
+  - id: site-model
+    command: site model --format json
+    depends_on: [status]
+
+  - id: agent-briefing
+    command: site doctor --agent --deep --format json
+    depends_on: [site-model]
+
+  - id: contract-codebus
+    command: audit contracts --prefix / --verify-code --format json
+    depends_on: [agent-briefing]
+
+  - id: preview-da-tree
+    command: preview tree / --verify --yes --format json
+    depends_on: [contract-codebus]
+
+  - id: explain-index
+    command: preview explain /index --format json
+    depends_on: [preview-da-tree]
+
+  - id: audit-home
+    command: audit full / --format json
+    depends_on: [explain-index]
+
+  - id: audit-how
+    command: audit full /how-it-works --format json
+    depends_on: [explain-index]
+
+  - id: audit-architecture
+    command: audit full /architecture --format json
+    depends_on: [explain-index]
+
+  - id: audit-jcr
+    command: audit full /jcr-model --format json
+    depends_on: [explain-index]
+
+  - id: audit-references
+    command: audit full /references-launches --format json
+    depends_on: [explain-index]
+
+  - id: audit-api
+    command: audit full /api --format json
+    depends_on: [explain-index]
+
+  - id: audit-readiness
+    command: audit full /readiness --format json
+    depends_on: [explain-index]
+
+  - id: design-home
+    command: design audit /index.html --format json
+    depends_on: [explain-index]
+
+  - id: preview-freshness
+    command: site freshness / --include-shared --fail-on preview-stale,preview-missing,source-missing,probe-failed,unknown --format json
+    depends_on: [audit-home, audit-how, audit-architecture, audit-jcr, audit-references, audit-api, audit-readiness, design-home]
+
+  - id: workflow-css-proof
+    command: code verify /tools/workflow-explorer.css --contains .operator-footer --format json
+    depends_on: [preview-freshness]
+
+  - id: global-style-proof
+    command: code verify /styles/styles.css --contains .skip-link --format json
+    depends_on: [preview-freshness]
+
+  - id: final-doctor
+    command: site doctor --agent --deep --format json
+    depends_on: [workflow-css-proof, global-style-proof]

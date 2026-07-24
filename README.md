@@ -11,7 +11,7 @@ The product story and living technical manual for the AEM Diff Engine delivered 
 
 DA is the source of truth for authored HTML, navigation, and footer content. Git owns EDS block code, design intent, static tools, validation contracts, and build evidence. Authored DA documents are intentionally not mirrored into Git.
 
-The design direction is documented in [DESIGN.md](./DESIGN.md), and the route/content contract lives in [dogfood/CONTENT-IA.md](./dogfood/CONTENT-IA.md).
+The design direction is documented in [DESIGN.md](./DESIGN.md), the route/content contract lives in [dogfood/CONTENT-IA.md](./dogfood/CONTENT-IA.md), and the current dogfood evidence is retained in [dogfood/REPORT.md](./dogfood/REPORT.md).
 
 ## Local development
 
@@ -30,6 +30,10 @@ npm run lint
 npm run validate:workflows
 npm run validate:site-shell
 npm run check
+
+# Preview-only DA certification (dry-run first)
+node /path/to/da-cli/bin/da.js --org somarc --repo aem-diff-engine --branch main \
+  --format json pipeline run dogfood/certify.yaml --dry-run
 ```
 
 The Workflow Explorer is a static, deep-linkable code-bus tool pinned to the checked runtime contract in `dogfood/diff-engine-runtime-contract.json`. The site-shell validator keeps its standalone navigation and attribution aligned with the DA-authored shell.
