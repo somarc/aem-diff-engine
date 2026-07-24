@@ -143,6 +143,21 @@ function decorateButtons(main) {
 }
 
 /**
+ * Adds a keyboard-first skip link and a stable main landmark target.
+ * @param {HTMLElement} main The main content element
+ */
+function decorateAccessibility(main) {
+  if (!main) return;
+  main.id = main.id || 'main-content';
+  if (document.querySelector('.skip-link')) return;
+  const skipLink = document.createElement('a');
+  skipLink.className = 'skip-link';
+  skipLink.href = `#${main.id}`;
+  skipLink.textContent = 'Skip to content';
+  document.body.prepend(skipLink);
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -164,6 +179,7 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
+    decorateAccessibility(main);
     decorateMain(main);
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);

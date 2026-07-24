@@ -81,6 +81,26 @@ body.appear {
   display: block;
 }
 
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  top: 0.75rem;
+  left: 0.75rem;
+  transform: translateY(-180%);
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  background: var(--current-color);
+  color: var(--dark-color);
+  font-family: var(--label-font-family);
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 body::before {
   content: "";
   position: fixed;
